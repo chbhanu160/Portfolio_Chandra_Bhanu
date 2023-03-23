@@ -50,6 +50,26 @@ window.onscroll = () => {
         delay: 200
     });
 
+
+     /* =============== slideshow (achievements) start ================== */
+
+     let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 4000); // Change image every 2 seconds
+}
+
+ /* =============== slideshow (achievements) end ================== */
+
     ScrollReveal().reveal('.home-content, .heading', { origin:'top'});
     ScrollReveal().reveal('.home-img, .services-container,.Experiences-container,.portfolio-box, .contact form', 
     { origin:'bottom'});
@@ -65,4 +85,5 @@ window.onscroll = () => {
         backSpeed: 100,
         backDelay: 1000,
         loop: true
+
     });
