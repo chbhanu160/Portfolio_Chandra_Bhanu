@@ -94,8 +94,8 @@ ScrollReveal().reveal(".home-content p, .about-content", { origin: "right" });
 
 const typed = new Typed(".multiple-text", {
   strings: ["Frontend Developer!", "Graphic Designer!", "Video Editor!"],
-  typeSpeed: 100,
-  backSpeed: 100,
+  typeSpeed: 300,
+  backSpeed: 300,
   backDelay: 1000,
   loop: true,
 });
