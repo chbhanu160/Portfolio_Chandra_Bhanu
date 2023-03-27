@@ -1,12 +1,10 @@
 <?php
 
- 
-
 if (isset($_POST['Email'])) {
 
     // EDIT THE FOLLOWING TWO LINES:
     $email_to = "chbhanu160@gmail.com";
-    $email_subject = "New form submissions";
+    $email_subject = "portfolio submissions";
 
     function problem($error)
     {
@@ -19,8 +17,8 @@ if (isset($_POST['Email'])) {
 
     // validation expected data exists
     if (
-        isset($_POST['Name']);
-        isset($_POST['Email']);
+        isset($_POST['Name']) ||
+        isset($_POST['Email']) ||
         isset($_POST['Message']);
     ) {
         problem('We are sorry, but there appears to be a problem with the form you submitted.');
