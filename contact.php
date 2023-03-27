@@ -1,8 +1,11 @@
 <?php
+
+ 
+
 if (isset($_POST['Email'])) {
 
     // EDIT THE FOLLOWING TWO LINES:
-    $email_to = "you@yourdomain.com";
+    $email_to = "chbhanu160@gmail.com";
     $email_subject = "New form submissions";
 
     function problem($error)
@@ -16,9 +19,9 @@ if (isset($_POST['Email'])) {
 
     // validation expected data exists
     if (
-        !isset($_POST['Name']);
-        !isset($_POST['Email']);
-        !isset($_POST['Message']);
+        isset($_POST['Name']);
+        isset($_POST['Email']);
+        isset($_POST['Message']);
     ) {
         problem('We are sorry, but there appears to be a problem with the form you submitted.');
     }
@@ -70,6 +73,16 @@ if (isset($_POST['Email'])) {
     // <!-- INCLUDE YOUR SUCCESS MESSAGE BELOW -->
 
     // Thanks for getting in touch. We'll get back to you soon.
+
+    function function_alert($message) {   
+        // Display the alert box    
+           echo "<script type ='text/JavaScript'>";  
+           echo "alert('$message')";  
+           echo "</script>";   
+       }   
+       // Function call   
+       function_alert(" Thanks for getting in touch. We'll get back to you soon!  ");   
+   
 
 }
 ?>
