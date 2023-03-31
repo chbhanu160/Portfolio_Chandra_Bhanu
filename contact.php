@@ -1,91 +1,33 @@
 <?php
 
-if (isset($_POST['email'])) {
+$name = $_POST["name"];
+$email = $_POST["email"];
+$subject = $_POST["subject"];
+$message = $_POST["message"];
 
-    // EDIT THE FOLLOWING TWO LINES:
-    $email_to = "chbhanu160@gmail.com";
-    $email_subject = "portfolio submissions";
+require "vendor/autoload.php";
 
-    function problem($error)
-    {
-        echo "We're sorry, but there were error(s) found with the form you submitted. ";
-        echo "These errors appear below.<br><br>";
-        echo $error . "<br><br>";
-        echo "Please go back and fix these errors.<br><br>";
-        die();
-    }
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
-    // validation expected data exists
-    if (
-        isset($_POST['Name']) ||
-        isset($_POST['Email']) ||
-        isset($_POST['Message']);
-        isset($_POST['Subject']);
-        isset($_POST['Contact']);
-    ) {
-        problem('We are sorry, but there appears to be a problem with the form you submitted.');
-    }
+$mail = new PHPMailer(true);
 
-    $name = $_POST['Name']; // required
-    $email = $_POST['Email']; // required
-    $message = $_POST['Message']; // required
-    $message = $_POST['Contact']; // required
+// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
-    $error_message = "";
-    $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+$mail->isSMTP();
+$mail->SMTPAuth = true;
 
-    if (!preg_match($email_exp, $email)) {
-        $error_message .= 'The Email address you entered does not appear to be valid.<br>';
-    }
+$mail->Host = "smtp.example.com";
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port = 587;
 
-    $string_exp = "/^[A-Za-z .'-']+$/";
+$mail->Username = "chbhanu160@gmail.com";
+$mail->Password = "kumarchandrabhanu123";
 
-    if (!preg_match($string_exp, $name)) {
-        $error_message .= 'The Name you entered does not appear to be valid.<br>';
-    }
+$mail->setFrom($email, $name);
+$mail->addAddress("chbhanu160@gmail.com", "Kumar Chandra bhanu");
 
-    if (strlen($message) < 2) {
-        $error_message .= 'The Message you entered do not appear to be valid.<br>';
-    }
+$mail->Subject = $subject;
+$mail->Body = $message;
 
-    if (strlen($error_message) > 0) {
-        problem($error_message);
-    }
-
-    $email_message = "Form details below.\n\n";
-
-    function clean_string($string)
-    {
-        $bad = array("content-type", "bcc:", "to:", "cc:", "href");
-        return str_replace($bad, "", $string);
-    }
-
-    $email_message .= "Name: " . clean_string($name) . "\n";
-    $email_message .= "Email: " . clean_string($email) . "\n";
-    $email_message .= "Message: " . clean_string($message) . "\n";
-    $email_message .= "Contact: " . clean_string($contact) . "\n";
-    $email_message .= "Subject: " . clean_string($subject) . "\n";
-
-    // create email headers
-    $headers = 'From: ' . $email . "\r\n" .
-        'Reply-To: ' . $email . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
-    @mail($email_to, $email_subject, $email_message, $headers);
-
-
-    // <!-- INCLUDE YOUR SUCCESS MESSAGE BELOW -->
-
-    // Thanks for getting in touch. We'll get back to you soon.
-
-    function function_alert($message) {   
-        // Display the alert box    
-           echo "<script type ='text/JavaScript'>";  
-           echo "alert('$message')";  
-           echo "</script>";   
-       }   
-       // Function call   
-       function_alert(" Thanks for getting in touch. We'll get back to you soon!  ");   
-   
-
-}
-?>
+$mail->send();
