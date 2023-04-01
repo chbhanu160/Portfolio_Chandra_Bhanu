@@ -1,3 +1,36 @@
+// contact js start
+
+// document.getElementById("sendBtn").onclick()
+
+function sendMail() {
+  var params = {
+    Name: document.getElementById("Name").value,
+    Email: document.getElementById("Email").value,
+    Contact: document.getElementById("Contact").value,
+    Message: document.getElementById("Message").value,
+    Subject: document.getElementById("Subject").value,
+    
+  };
+
+  const serviceID = "service_ky9wyu9";
+  const templateID = "template_81qrj93";
+
+    emailjs.send(serviceID, templateID, params)
+    .then(res=>{
+        document.getElementById("Name").value = "";
+        document.getElementById("Email").value = "";
+        document.getElementById("Contact").value = "";
+        document.getElementById("Message").value = "";
+        document.getElementById("Subject").value = "";
+        
+        console.log(res);
+        alert("Your message sent successfully!!")
+
+    })
+    .catch(err=>console.log(err));
+
+}
+
 /* =============== toggle icon navbar ================== */
 
 let menuIcon = document.querySelector("#menu-icon");
